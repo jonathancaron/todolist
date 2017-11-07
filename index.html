@@ -29,13 +29,8 @@ Onclick sur la "puce"s: vérifier s'il est dans le temps imparti, si ok vert sin
 
     <div id="main">
       <div id="haut">
-        <div id="prenom">
-
-        </div>
-        <div class="date">
-          21 novembre 2017
-        </div>
-
+        <div id="prenom"></div>
+        <div id="date"></div>
       </div>
       <div id="milieu">
         Liste des tâches
@@ -69,72 +64,81 @@ Onclick sur la "puce"s: vérifier s'il est dans le temps imparti, si ok vert sin
 
   <script>
   var getJSON = function(url) {
-  return new Promise(function(resolve, reject) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('get', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-      var status = xhr.status;
-      if (status == 200) {
-        resolve(xhr.response);
-      } else {
-        reject(status);
+    return new Promise(function(resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('get', url, true);
+      xhr.responseType = 'json';
+      xhr.onload = function() {
+        var status = xhr.status;
+        if (status == 200) {
+          resolve(xhr.response);
+        } else {
+          reject(status);
+        }
+      };
+      xhr.send();
+    });
+  };
+
+
+
+  getJSON('./json/fr.json').then(function(data) {
+
+      for (var i = 0; i < data.length; i++) {
+
+        if(data[i].prenom != "John") {return false;}
+        document.getElementById('prenom').innerText += ' ' + data[i].prenom;
+
+        for (var i2 = 0; i2 < data[i].taches.length; i2++) {
+          if(data[i].taches[i2].status==1) /*fait - ADD2*/
+          {
+            document.getElementById('add2').innerText += ' ' + data[i].taches[i2].tache + data[i].taches[i2].date + data[i].taches[i2].datefin;
+            document.getElementById('add2').innerHTML += '<br>';
+          }
+          else if(data[i].taches[i2].status==2) /*en retard - ADD3*/
+          {
+            document.getElementById('add3').innerText += ' ' + data[i].taches[i2].tache + data[i].taches[i2].date + data[i].taches[i2].datefin;
+            document.getElementById('add3').innerHTML += '<br>';
+          }
+          else /*à faire - ADD1*/
+          {
+            document.getElementById('add1').innerText += ' ' + data[i].taches[i2].tache + data[i].taches[i2].date + data[i].taches[i2].datefin;
+            document.getElementById('add1').innerHTML += '<br>';
+          }
+        }
       }
-    };
-    xhr.send();
+
+  }, function(status) {
+    alert('Le fichier JSON est introuvable.');
   });
-};
+  function dateFr()
+  {
+     // les noms de jours / mois
+     var jours = new Array("dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi");
+     var mois = new Array("janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "decembre");
+     // on recupere la date
+     var date = new Date();
+     // on construit le message
+     var message = /*jours[date.getDay()] + */"";   // nom du jour
+     message += date.getDate() + " ";   // numero du jour
+     message += mois[date.getMonth()] + " ";   // mois
+     message += date.getFullYear();
+     return message;
+  }
+  function heure()
+  {
+     var date = new Date();
+     var heure = date.getHours();
+     var minutes = date.getMinutes();
+     if(minutes < 10)
+          minutes = "0" + minutes;
+     return heure + "h" + minutes;
+   }
+   document.getElementById('date').innerText = dateFr() + ' - ' + heure();
+   function actuDateHeure(){
+     document.getElementById('date').innerText = dateFr() + ' - ' + heure();}
 
-
-
-getJSON('./json/fr.json').then(function(data) {
-
-    for (var i = 0; i < data.length; i++) {
-
-      if(data[i].prenom != "John") {return false;}
-      document.getElementById('prenom').innerText += ' ' + data[i].prenom;
-      document.getElementById('result').innerHTML += '<br>';
-
-      for (var i2 = 0; i2 < data[i].taches.length; i2++) {
-
-
-
-        /*document.getElementById('result').innerText += ' ' + data[i].taches[i2].tache;
-        document.getElementById('result').innerText += ' ' + data[i].taches[i2].date;
-        document.getElementById('result').innerText += ' ' + data[i].taches[i2].datefin;*/
-
-        if(data[i].taches[i2].status==1) /*fait - ADD2*/
-        {
-          document.getElementById('add2').innerText += ' ' + data[i].taches[i2].tache;
-          document.getElementById('add2').innerText += ' ' + data[i].taches[i2].date;
-          document.getElementById('add2').innerText += ' ' + data[i].taches[i2].datefin;
-          document.getElementById('add2').innerHTML += '<br>';
-        }
-        else if(data[i].taches[i2].status==2) /*en retard - ADD3*/
-        {
-          document.getElementById('add3').innerText += ' ' + data[i].taches[i2].tache;
-          document.getElementById('add3').innerText += ' ' + data[i].taches[i2].date;
-          document.getElementById('add3').innerText += ' ' + data[i].taches[i2].datefin;
-          document.getElementById('add3').innerHTML += '<br>';
-        }
-        else /*à faire - ADD1*/
-        {
-          document.getElementById('add1').innerText += ' ' + data[i].taches[i2].tache;
-          document.getElementById('add1').innerText += ' ' + data[i].taches[i2].date;
-          document.getElementById('add1').innerText += ' ' + data[i].taches[i2].datefin;
-          document.getElementById('add1').innerHTML += '<br>';
-        }
-
-      }
-
-      document.getElementById('result').innerHTML += '<br>';
-
-
-    }
-
-}, function(status) {
-  alert('Le fichier JSON est introuvable.');
-});
+  setInterval(actuDateHeure, 1000);
 
   </script>
 </html>
