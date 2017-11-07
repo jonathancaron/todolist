@@ -4,12 +4,14 @@
     "prenom":"John" ,
     "taches":[
       {
+        "id":"1",
         "tache":"Apprendre le html",
         "date":"",
         "datefin":"",
         "status":"1"
       },
       {
+        "id":"2",
         "tache":"Apprendre le javascript",
         "date":"",
         "datefin":"",
@@ -22,6 +24,7 @@
     "prenom":"Barry" ,
     "taches":[
       {
+        "id":"1",
         "tache":"Apprendre le html",
         "date":"",
         "datefin":"",

@@ -3,6 +3,9 @@ body{
   padding: 0;
   font-family: sans-serif;
 }
+#add1 div{display: inline;}
+#add2 div{display: inline;}
+#add3 div{display: inline;}
 #main{
   width: 900px;
   margin-left: auto;
