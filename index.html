@@ -1,0 +1,139 @@
+<!--
+INSTRUCTIONS
+CREATION D'UNE TODOLIST EN JS
+
+afficher nom et date en json
+json task également
+
+add element
+close element
+time
+date todolist
+
+todo (à faire) : bleue
+done (fait) : vert
+to late (en retard) : rouge
+
+
+Onclick sur la "puce"s: vérifier s'il est dans le temps imparti, si ok vert sinon rouge
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Todolist</title>
+    <link rel="stylesheet" href="./css/my.css">
+  </head>
+  <body>
+    <div id="result"></div>
+
+    <div id="main">
+      <div id="haut">
+        <div id="prenom">
+
+        </div>
+        <div class="date">
+          21 novembre 2017
+        </div>
+
+      </div>
+      <div id="milieu">
+        Liste des tâches
+        <hr>
+        <div class="blocbleu"> <!-- à faire -->
+          <div class="soustitre">A faire</div>
+          <div id="add1">
+
+          </div>
+        </div>
+        <div class="blocvert"> <!-- fait -->
+          <div class="soustitre">Fait</div>
+        </div>
+        <div id="add2">
+
+        </div>
+        <div class="blocrouge"> <!-- en retard -->
+          <div class="soustitre">En retard</div>
+        </div>
+        <div id="add3">
+
+        </div>
+      </div>
+      <div id="bas">
+
+      </div>
+    </div>
+</body>
+
+
+  <script>
+  var getJSON = function(url) {
+  return new Promise(function(resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('get', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status == 200) {
+        resolve(xhr.response);
+      } else {
+        reject(status);
+      }
+    };
+    xhr.send();
+  });
+};
+
+
+
+getJSON('./json/fr.json').then(function(data) {
+
+    for (var i = 0; i < data.length; i++) {
+
+      if(data[i].prenom != "John") {return false;}
+      document.getElementById('prenom').innerText += ' ' + data[i].prenom;
+      document.getElementById('result').innerHTML += '<br>';
+
+      for (var i2 = 0; i2 < data[i].taches.length; i2++) {
+
+
+
+        /*document.getElementById('result').innerText += ' ' + data[i].taches[i2].tache;
+        document.getElementById('result').innerText += ' ' + data[i].taches[i2].date;
+        document.getElementById('result').innerText += ' ' + data[i].taches[i2].datefin;*/
+
+        if(data[i].taches[i2].status==1) /*fait - ADD2*/
+        {
+          document.getElementById('add2').innerText += ' ' + data[i].taches[i2].tache;
+          document.getElementById('add2').innerText += ' ' + data[i].taches[i2].date;
+          document.getElementById('add2').innerText += ' ' + data[i].taches[i2].datefin;
+          document.getElementById('add2').innerHTML += '<br>';
+        }
+        else if(data[i].taches[i2].status==2) /*en retard - ADD3*/
+        {
+          document.getElementById('add3').innerText += ' ' + data[i].taches[i2].tache;
+          document.getElementById('add3').innerText += ' ' + data[i].taches[i2].date;
+          document.getElementById('add3').innerText += ' ' + data[i].taches[i2].datefin;
+          document.getElementById('add3').innerHTML += '<br>';
+        }
+        else /*à faire - ADD1*/
+        {
+          document.getElementById('add1').innerText += ' ' + data[i].taches[i2].tache;
+          document.getElementById('add1').innerText += ' ' + data[i].taches[i2].date;
+          document.getElementById('add1').innerText += ' ' + data[i].taches[i2].datefin;
+          document.getElementById('add1').innerHTML += '<br>';
+        }
+
+      }
+
+      document.getElementById('result').innerHTML += '<br>';
+
+
+    }
+
+}, function(status) {
+  alert('Le fichier JSON est introuvable.');
+});
+
+  </script>
+</html>

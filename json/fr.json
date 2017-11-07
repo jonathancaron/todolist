@@ -1,0 +1,34 @@
+
+[
+  {
+    "prenom":"John" ,
+    "taches":[
+      {
+        "tache":"Apprendre le html",
+        "date":"",
+        "datefin":"",
+        "status":""
+      },
+      {
+        "tache":"Apprendre le javascript",
+        "date":"",
+        "datefin":"",
+        "status":""
+      }
+
+    ]
+  },
+  {
+    "prenom":"Barry" ,
+    "taches":[
+      {
+        "tache":"Apprendre le html",
+        "date":"",
+        "datefin":"",
+        "status":""
+      }
+
+    ]
+  }
+
+]
