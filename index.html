@@ -86,21 +86,17 @@ Onclick sur la "puce"s: vérifier s'il est dans le temps imparti, si ok vert sin
           if(data[i].taches[i2].status==1) /*fait - ADD2*/
           {
             document.getElementById('add2').innerHTML += '<div id="plus'+ data[i].taches[i2].id  +'"><img src="./img/plus.png" width="12px"></div>' + '<div id="moins'+ data[i].taches[i2].id  +'"><img src="./img/minus.png" width="12px"></div>';
-            document.getElementById('add2').innerHTML += ' ' + data[i].taches[i2].tache + data[i].taches[i2].date + data[i].taches[i2].datefin;
-            document.getElementById('add2').innerHTML += '<br>';
-
+            document.getElementById('add2').innerHTML += '<div id="'+ data[i].taches[i2].id  +'"> '+ data[i].taches[i2].tache + data[i].taches[i2].date + data[i].taches[i2].datefin + '<br></div>';
           }
           else if(data[i].taches[i2].status==2) /*en retard - ADD3*/
           {
             document.getElementById('add3').innerHTML += '<div id="plus'+ data[i].taches[i2].id  +'"><img src="./img/plus.png" width="12px"></div>' + '<div id="moins'+ data[i].taches[i2].id  +'"><img src="./img/minus.png" width="12px"></div>';
-            document.getElementById('add3').innerHTML += ' ' + data[i].taches[i2].tache + data[i].taches[i2].date + data[i].taches[i2].datefin;
-            document.getElementById('add3').innerHTML += '<br>';
+            document.getElementById('add3').innerHTML += '<div id="'+ data[i].taches[i2].id  +'"> '+ data[i].taches[i2].tache + data[i].taches[i2].date + data[i].taches[i2].datefin + '<br></div>';
           }
           else /*à faire - ADD1*/
           {
             document.getElementById('add1').innerHTML += '<div id="plus'+ data[i].taches[i2].id  +'"><img src="./img/plus.png" width="12px"></div>' + '<div id="moins'+ data[i].taches[i2].id  +'"><img src="./img/minus.png" width="12px"></div>';
-            document.getElementById('add1').innerHTML += ' ' + data[i].taches[i2].tache + data[i].taches[i2].date + data[i].taches[i2].datefin;
-            document.getElementById('add1').innerHTML += '<br>';
+            document.getElementById('add1').innerHTML += '<div id="'+ data[i].taches[i2].id  +'"> '+ data[i].taches[i2].tache + data[i].taches[i2].date + data[i].taches[i2].datefin + '<br></div>';
           }
         }
       }
