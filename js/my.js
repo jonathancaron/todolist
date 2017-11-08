@@ -1,4 +1,6 @@
 "use strict"
+
+
 function getData(){
 let data = {
   "user" : {
@@ -34,32 +36,32 @@ let data = {
 return data;
 }
 function updateData(){
-
 }
+
 function setUser(nickname){
   document.getElementById('prenom').innerHTML = nickname;
 }
+
 function setTask(task){
   function display(status){
     let node = document.createElement('li');
+    node.className = "list-item";
     let textnode = document.createTextNode(task.title);
     node.appendChild(textnode);
     document.getElementById(status).appendChild(node);
   }
   console.log(task);
   if(task.done_on === null)
-  {
-    display("todo");
-  }
+    {display("todo");}
   else {
-    if(task.done_on <= task.deadline){
-      display("done");
-    }
-    else{
-      display("late");
-    }
+    if(task.done_on <= task.deadline)
+      {display("done");}
+    else
+      {display("late");}
   }
-
+}
+function endTask(i){
+  console.log(i);
 }
 const app = function(data){
   let nickname = data.user.name;
@@ -68,8 +70,15 @@ const app = function(data){
   let tasks = data.task;
   for(let i in tasks){
     setTask(tasks[i]);
+    alert(i);
   }
 
+// events
+  let todoItems = document.getElementById("todo").getElementsByClassName("list-item");
+  let i = 0;
+  while (i < todoItems.length) {
+    i++;
+  }
 }
 
 app(getData());
