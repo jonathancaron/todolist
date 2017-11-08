@@ -12,7 +12,21 @@
       },
       {
         "id":"2",
+        "tache":"Apprendre le CSS",
+        "date":"",
+        "datefin":"",
+        "status":"1"
+      },
+      {
+        "id":"3",
         "tache":"Apprendre le javascript",
+        "date":"",
+        "datefin":"",
+        "status":""
+      },
+      {
+        "id":"2",
+        "tache":"Apprendre le framework jQuery",
         "date":"",
         "datefin":"",
         "status":""
