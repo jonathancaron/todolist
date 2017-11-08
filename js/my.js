@@ -12,7 +12,6 @@ let data = {
       "title"         : "Faire à manger",
       "created_on"    : 1510180290,
       "deadline"      : 1510180457,
-      "status"        : "todo",
       "done_on"       : null,
       "user"          : [0]
     },
@@ -20,16 +19,14 @@ let data = {
       "title"         : "Faire la vaisselle",
       "created_on"    : 1510180290,
       "deadline"      : 1510180457,
-      "status"        : "done",
-      "done_on"       : null,
-      "user"          : [0]
+      "done_on"       : 1510180457,
+      "user"          : [0,1]
     },
     {
       "title"         : "Sortir les poubelles",
       "created_on"    : 1510180290,
       "deadline"      : 1510180457,
-      "status"        : "late",
-      "done_on"       : null,
+      "done_on"       : 1510180567,
       "user"          : [0]
     }
   ]
@@ -43,13 +40,26 @@ function setUser(nickname){
   document.getElementById('prenom').innerHTML = nickname;
 }
 function setTask(task){
+  function display(status){
+    let node = document.createElement('li');
+    let textnode = document.createTextNode(task.title);
+    node.appendChild(textnode);
+    document.getElementById(status).appendChild(node);
+  }
   console.log(task);
-  if(task.done == false){
-
+  if(task.done_on === null)
+  {
+    display("todo");
   }
-  else{
-
+  else {
+    if(task.done_on <= task.deadline){
+      display("done");
+    }
+    else{
+      display("late");
+    }
   }
+
 }
 const app = function(data){
   let nickname = data.user.name;
